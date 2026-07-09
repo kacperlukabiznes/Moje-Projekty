@@ -2,6 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Garaż 2026</title>
     <style>
         body {
@@ -12,7 +13,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
+            padding: 40px0;
             margin: 0;
         }
         .karta {
@@ -42,6 +44,70 @@
             background-color: #5900ff;
             transform: scale(1.05);
         }
+        /* Styl dla całej sekcji galerii - tutaj odpalamy Grid */
+.galeria-modeli {
+    display: grid;
+    /* Tworzy 3 kolumny o równej szerokości, które automatycznie dopasują się do ekranu */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    /* Odstęp między kartami */
+    gap: 25px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Styl dla pojedynczej karty w galerii */
+.karta-modelu {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    color: white;
+    /* Płynne przejście efektu, który dodamy za chwilę */
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Profesjonalny efekt hover - karta unosi się i dostaje fioletową poświatę */
+.karta-modelu:hover {
+    transform: translateY(-10px);
+    border-color: #5900ff;
+    box-shadow: 0 10px 25px rgba(89, 0, 255, 0.3);
+}
+
+/* Tytuły w kartach */
+.karta-modelu h2 {
+    color: #5900ff;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+/* Tekst w kartach */
+.karta-modelu p {
+    color: #cccccc;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Nowe, minimalistyczne przyciski dla modeli */
+.btn-model {
+    background: transparent;
+    color: white;
+    border: 2px solid #5900ff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-model:hover {
+    background: #5900ff;
+    box-shadow: 0 0 15px #5900ff;
+}
     </style>
 </head>
 <body>
@@ -51,6 +117,31 @@
         <p>Status: Nowe BMW. Cel: BMW</p>
         <button onclick="alert(TYLKO BMWW WRRRUM)">Lecimy</button>
     </div>
+    <!-- Sekcja Galerii Modeli BMW -->
+<section class="galeria-modeli">
+    
+    <!-- Karta 1: M3 -->
+    <article class="karta-modelu">
+        <h2>BMW M3 Sedan</h2>
+        <p>Ikona motorsportu w codziennym wydaniu. Moc, precyzja i legendarny napęd na tył.</p>
+        <button class="btn-model">Sprawdź konfigurację</button>
+    </article>
+
+    <!-- Karta 2: M4 -->
+    <article class="karta-modelu">
+        <h2>BMW M4 Coupé</h2>
+        <p>Bezkompromisowa sylwetka i potężne osiągi. Stworzone, by dominować na torze.</p>
+        <button class="btn-model">Sprawdź konfigurację</button>
+    </article>
+
+    <!-- Karta 3: i8 -->
+    <article class="karta-modelu">
+        <h2>BMW i8 Roadster</h2>
+        <p>Hybrydowa przyszłość i futurystyczny design. Styl, który wyprzedza swoje czasy.</p>
+        <button class="btn-model">Sprawdź konfigurację</button>
+    </article>
+
+</section>
 
 </body>
 </html>
