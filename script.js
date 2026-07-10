@@ -55,7 +55,7 @@ function generujSalon(lista = bazaSamochodow) {
             </article>
         `;
     });
-} // <--- TUTAJ BRAKOWAŁO TEJ KLAMRY ZAMYKAJĄCEJ FUNKCJĘ!
+}
 
 // Odpalamy generowanie salonu natychmiast po załadowaniu skryptu
 generujSalon();
@@ -71,17 +71,29 @@ function odpalFure() {
 }
 
 function obliczRate(nazwaModelu, cenaAuta) {
+    // 1. Najpierw wyliczamy ratę (przywrócone linijki!)
     const iloscMiesiecy = 60; 
     let rata = cenaAuta / iloscMiesiecy;
     rata = parseFloat(rata.toFixed(2)); 
     
+    // 2. Logi w konsoli
     if (rata > 7800) {
         console.log("⚠️ Grubo! Potrzebujesz mocnej zdolności leasingowej na to " + nazwaModelu + "!");
     } else {
         console.log("✅ Dobra rata, " + nazwaModelu + " wjeżdża na firmę w ciemno!");
     }
 
+    // 3. Pokazujemy harmonogram na stronie
     pokazHarmonogram(nazwaModelu, rata);
+
+    // 4. Budujemy obiekt i zapisujemy go do LocalStorage jako JSON
+    const konfiguracja = {
+        model: nazwaModelu,
+        cena: cenaAuta,
+        rata: rata
+    };
+
+    localStorage.setItem("ostatniaKonfiguracja", JSON.stringify(konfiguracja));
 }
 
 function pokazHarmonogram(nazwaModelu, rata) {
@@ -142,3 +154,21 @@ function wyszukajAuto() {
 
     generujSalon(pasujaceAuta);
 }
+
+// 3. SPRAWDZANIE PAMIĘCI I ODKODOWANIE OBIEKTU JSON
+function sprawdzPamiecPrzegladarki() {
+    let zapisanyJSON = localStorage.getItem("ostatniaKonfiguracja");
+    let boksKomunikatu = document.getElementById("ostatni-wybor");
+
+    if (zapisanyJSON) {
+        // Zamieniamy tekst JSON z powrotem w obiekt JavaScript
+        let dane = JSON.parse(zapisanyJSON);
+        
+        // Wyświetlamy bogatszy komunikat korzystając z właściwości obiektu
+        boksKomunikatu.innerHTML = `⭐ Ostatnia konfiguracja: <b>${dane.model}</b> (Cena: ${dane.cena.toLocaleString()} PLN, Rata: ${dane.rata} PLN/mc)`;
+        boksKomunikatu.style.display = "block";
+    }
+}
+
+// Odpalamy sprawdzanie pamięci natychmiast przy uruchomieniu strony
+sprawdzPamiecPrzegladarki();
