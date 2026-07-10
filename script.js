@@ -148,11 +148,26 @@ function sprawdzBudzet() {
 function wyszukajAuto() {
     let szukanaFraza = document.getElementById("wyszukiwarka-text").value.toLowerCase();
     
+    // Filtrujemy bazę
     const pasujaceAuta = bazaSamochodow.filter(auto => {
         return auto.nazwa.toLowerCase().includes(szukanaFraza);
     });
 
-    generujSalon(pasujaceAuta);
+    const galeriaWlasciwa = document.getElementById("galeria-samochodow");
+
+    // REAKCJA NA BRAK WYNIKÓW
+    if (pasujaceAuta.length === 0) {
+        // Jeśli tablica jest pusta, wyświetlamy komunikat błędu zamiast pustki
+        galeriaWlasciwa.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: #1a1a1a; border-radius: 12px; border: 1px dashed #5900ff; margin-top: 20px;">
+                <p style="font-size: 20px; color: #ff0055; margin: 0 0 10px 0; font-weight: bold;">📉 Brak wyników!</p>
+                <p style="color: #aaa; margin: 0;">Niestety, nie mamy takiego potwora w naszej stajni. Spróbuj wpisać M3, M4, M5 lub i8!</p>
+            </div>
+        `;
+    } else {
+        // Jeśli znaleziono auta, normalnie renderujemy salon
+        generujSalon(pasujaceAuta);
+    }
 }
 
 // 3. SPRAWDZANIE PAMIĘCI I ODKODOWANIE OBIEKTU JSON
