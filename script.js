@@ -26,14 +26,14 @@ const bazaSamochodow = [
     }
 ];
 
-// Podmień początek funkcji generujSalon na to:
 function generujSalon(lista = bazaSamochodow) {
-    const galeria = document.getElementById("galeria-somochodow"); // upewnij się, że ID pasuje do index.html
     const galeriaWlasciwa = document.getElementById("galeria-samochodow");
     
+    // Jeśli nie znalazło elementu w HTML, przerywamy, żeby nie wywalić skryptu
+    if (!galeriaWlasciwa) return;
+
     galeriaWlasciwa.innerHTML = "";
     
-    // Teraz pętla leci po liście, którą jej przekażemy (całej lub przefiltrowanej)
     lista.forEach(auto => {
         let rataBazowa = (auto.cena / 60).toFixed(2);
         galeriaWlasciwa.innerHTML += `
@@ -128,4 +128,13 @@ function sprawdzBudzet() {
 
     // Odpalamy na nowo rysowanie salonu, ale przekazujemy tylko przefiltrowane auta!
     generujSalon(przefiltrowaneAuta);
-}
+} // <--- TA KLAMRA ZAMYKA FUNKCJĘ SPRAWDZBUDZET()
+
+function wyszukajAuto() {
+    let szukanaFraza = document.getElementById("wyszukiwarka-text").value.toLowerCase();
+    
+    const pasujaceAuta = bazaSamochodow.filter(auto => {
+        return auto.nazwa.toLowerCase().includes(szukanaFraza);
+    });
+
+    generujSalon(pasujaceAuta)}; // <--- TA KLAMRA ZAMYKA FUNKCJĘ WYSZUKAJAUTO()
