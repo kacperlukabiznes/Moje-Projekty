@@ -26,20 +26,17 @@ const bazaSamochodow = [
     }
 ];
 
-// 2. FUNKCJA, KTÓRA AUTOMATYCZNIE GENERUJE KARTY NA STRONIE
-function generujSalon() {
-    const galeria = document.getElementById("galeria-samochodow");
+// Podmień początek funkcji generujSalon na to:
+function generujSalon(lista = bazaSamochodow) {
+    const galeria = document.getElementById("galeria-somochodow"); // upewnij się, że ID pasuje do index.html
+    const galeriaWlasciwa = document.getElementById("galeria-samochodow");
     
-    // Czyścimy galerię na wszelki wypadek
-    galeria.innerHTML = "";
+    galeriaWlasciwa.innerHTML = "";
     
-    // Pętla forEach przechodzi przez każde auto z naszej bazy danych
-    bazaSamochodow.forEach(auto => {
-        // Obliczamy stawkę raty bazowej (cena / 60 miesięcy)
+    // Teraz pętla leci po liście, którą jej przekażemy (całej lub przefiltrowanej)
+    lista.forEach(auto => {
         let rataBazowa = (auto.cena / 60).toFixed(2);
-
-        // Doklejamy wygenerowany kod HTML do naszej galerii
-        galeria.innerHTML += `
+        galeriaWlasciwa.innerHTML += `
             <article class="karta-modelu">
                 <h2>${auto.nazwa}</h2>
                 <p>${auto.opis}</p>
@@ -111,17 +108,24 @@ function sprawdzBudzet() {
     if (isNaN(budzet) || budzet <= 0) {
         wynik.innerHTML = "❌ Wpisz poprawną kwotę, byku!";
         wynik.style.color = "red";
-    } else if (budzet >= 8000) {
-        wynik.innerHTML = "🔥 Masz gest! Stać Cię na całą stajnię! Wybieraj dowolny model!";
-        wynik.style.color = "#5900ff";
-    } else if (budzet >= 7500) {
-        wynik.innerHTML = "⚡ Dobra jest! Stać Cię na M3 Sedan albo i8 Roadster! M4 na razie poza zasięgiem.";
-        wynik.style.color = "green";
-    } else if (budzet >= 6000) {
-        wynik.innerHTML = "🚗 Klasyka! Twój budżet pozwoli na jazdę ztuningowanym BMW i8 Roadster!";
-        wynik.style.color = "green";
-    } else {
-        wynik.innerHTML = "📉 Za mało na te potwory. Doładuj budżet, zrób mocniejszą serię na siłowni i wróć później!";
-        wynik.style.color = "orange";
+        return; // Przerywamy funkcję, jeśli wpisano bzdury
     }
+
+    // MAGIA GITA I TABLIC: Filtrujemy auta, których rata bazowa (cena / 60) mieści się w budżecie
+    const przefiltrowaneAuta = bazaSamochodow.filter(auto => {
+        let rataBazowa = auto.cena / 60;
+        return rataBazowa <= budzet;
+    });
+
+    // Sprawdzamy, czy cokolwiek zostało na liście
+    if (przefiltrowaneAuta.length === 0) {
+        wynik.innerHTML = "📉 Żadne BMW z naszej stajni nie mieści się w tym budżecie. Doładuj konto!";
+        wynik.style.color = "orange";
+    } else {
+        wynik.innerHTML = `🔥 Znaleziono modele idealne dla Ciebie! (Dostępne: ${przefiltrowaneAuta.length})`;
+        wynik.style.color = "#5900ff";
+    }
+
+    // Odpalamy na nowo rysowanie salonu, ale przekazujemy tylko przefiltrowane auta!
+    generujSalon(przefiltrowaneAuta);
 }
