@@ -4,32 +4,36 @@ const bazaSamochodow = [
         id: "m3",
         nazwa: "BMW M3 Sedan",
         opis: "Ikona motorsportu w codziennym wydaniu. Moc, precyzja i legendarny napęd na tył.",
-        cena: 450000
+        cena: 450000,
+        foto: "https://grandcar.kz/wp-content/uploads/2024/10/20241027015948-c2e9a7ac-ba12-4167-957a-0a3db210025a.jpg"
     },
     {
         id: "m4",
         nazwa: "BMW M4 Coupé",
         opis: "Bezkompromisowa sylwetka i potężne osiągi. Stworzone, by dominować na torze.",
-        cena: 480000
+        cena: 480000,
+        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUhrI9dAkBIPpw_mpoYmFc9nNmF83WOG_E_4HQJov48g&s=10"
     },
     {
         id: "i8",
         nazwa: "BMW i8 Roadster",
         opis: "Hybrydowa przyszłość i futurystyczny design. Styl, który wyprzedza swoje czasy.",
-        cena: 360000
+        cena: 360000,
+        foto: "https://preview.redd.it/those-of-you-who-have-experienced-owned-a-bmw-i8-what-are-v0-5ar6xgjnukba1.jpg?width=640&crop=smart&auto=webp&s=60dc107db4c08afab4b1820dd8d9a93bf27881bc"
     },
     {
         id: "m5",
         nazwa: "BMW M5 Competition",
         opis: "Potwór w garniturze. Piekielnie szybki sedan z napędem xDrive i mocarnym V8.",
-        cena: 680000
+        cena: 680000,
+        foto: "https://media-r2.carsandbids.com/cdn-cgi/image/width=2080,quality=70/ea93686cb7f6bba23b9693c4dac92c0715d7c4cd/photos/3Rb7Rjv3-B76xlKuNqT-(edit).jpg?t=170565662284"
     }
 ];
 
+// 2. FUNKCJA, KTÓRA AUTOMATYCZNIE GENERUJE KARTY NA STRONIE
 function generujSalon(lista = bazaSamochodow) {
     const galeriaWlasciwa = document.getElementById("galeria-samochodow");
     
-    // Jeśli nie znalazło elementu w HTML, przerywamy, żeby nie wywalić skryptu
     if (!galeriaWlasciwa) return;
 
     galeriaWlasciwa.innerHTML = "";
@@ -38,6 +42,8 @@ function generujSalon(lista = bazaSamochodow) {
         let rataBazowa = (auto.cena / 60).toFixed(2);
         galeriaWlasciwa.innerHTML += `
             <article class="karta-modelu">
+                <img src="${auto.foto}" alt="${auto.nazwa}" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
+                
                 <h2>${auto.nazwa}</h2>
                 <p>${auto.opis}</p>
                 <p id="rata-${auto.id}" style="font-weight: bold; color: #5900ff; margin-bottom: 10px;">
@@ -49,13 +55,13 @@ function generujSalon(lista = bazaSamochodow) {
             </article>
         `;
     });
-}
+} // <--- TUTAJ BRAKOWAŁO TEJ KLAMRY ZAMYKAJĄCEJ FUNKCJĘ!
 
 // Odpalamy generowanie salonu natychmiast po załadowaniu skryptu
 generujSalon();
 
 
-// --- LOGIKA DIALOGÓW I HARMONOGRAMU (ZNANA Z ETAPU 1) ---
+// --- LOGIKA DIALOGÓW I HARMONOGRAMU ---
 
 function odpalFure() {
     let status = document.getElementById("status-tekst");
@@ -108,16 +114,14 @@ function sprawdzBudzet() {
     if (isNaN(budzet) || budzet <= 0) {
         wynik.innerHTML = "❌ Wpisz poprawną kwotę, byku!";
         wynik.style.color = "red";
-        return; // Przerywamy funkcję, jeśli wpisano bzdury
+        return;
     }
 
-    // MAGIA GITA I TABLIC: Filtrujemy auta, których rata bazowa (cena / 60) mieści się w budżecie
     const przefiltrowaneAuta = bazaSamochodow.filter(auto => {
         let rataBazowa = auto.cena / 60;
         return rataBazowa <= budzet;
     });
 
-    // Sprawdzamy, czy cokolwiek zostało na liście
     if (przefiltrowaneAuta.length === 0) {
         wynik.innerHTML = "📉 Żadne BMW z naszej stajni nie mieści się w tym budżecie. Doładuj konto!";
         wynik.style.color = "orange";
@@ -126,9 +130,8 @@ function sprawdzBudzet() {
         wynik.style.color = "#5900ff";
     }
 
-    // Odpalamy na nowo rysowanie salonu, ale przekazujemy tylko przefiltrowane auta!
     generujSalon(przefiltrowaneAuta);
-} // <--- TA KLAMRA ZAMYKA FUNKCJĘ SPRAWDZBUDZET()
+}
 
 function wyszukajAuto() {
     let szukanaFraza = document.getElementById("wyszukiwarka-text").value.toLowerCase();
@@ -137,4 +140,5 @@ function wyszukajAuto() {
         return auto.nazwa.toLowerCase().includes(szukanaFraza);
     });
 
-    generujSalon(pasujaceAuta)}; // <--- TA KLAMRA ZAMYKA FUNKCJĘ WYSZUKAJAUTO()
+    generujSalon(pasujaceAuta);
+}
