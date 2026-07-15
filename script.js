@@ -53,7 +53,7 @@ function generujSalon(lista = bazaSamochodow) {
                 <button class="btn-model" onclick="obliczRate('${auto.nazwa}', ${auto.cena})" style="flex: 1; width: 100%; border-radius: 8px; border: 2px solid #5900ff; background: #5900ff; color: white; cursor: pointer;">
                         Konfiguruj
                 </button>
-                <button class="btn-fav" style="width: 45px; height: 45px; background: transparent; color: #ff0055; border: 2px solid #5900ff; border-radius: 8px; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; style="flex: 1;">
+                <button class="btn-fav" onclick="dodajDoUlubionych('${auto.nazwa}')" style="width: 45px; height: 45px; background: transparent; color: #ff0055; border: 2px solid #5900ff; border-radius: 8px; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center;">
                         ❤️
 </button>
                 </div>
@@ -192,3 +192,13 @@ function sprawdzPamiecPrzegladarki() {
 
 // Odpalamy sprawdzanie pamięci natychmiast przy uruchomieniu strony
 sprawdzPamiecPrzegladarki();
+
+let ulubione = [];
+function dodajDoUlubionych(nazwaAuta) {
+    if (!ulubione.includes(nazwaAuta)) {
+        console.log("Kliknięto serduszko dla: " + nazwaAuta);
+        ulubione.push(nazwaAuta);
+        localStorage.setItem('ulubioneAuta' , JSON.stringify(ulubione));
+        console.log(ulubione);
+    }
+}
