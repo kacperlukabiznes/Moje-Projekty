@@ -3,136 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garaż 2026</title>
+    <title>BMW PERFORMANCE | BMW Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: #111;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 40px 0;
-            margin: 0;
-        }
-        .karta {
-            background: #222;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(140, 0, 255, 0.5);
-            text-align: center;
-            border: 1px solid #5900ff;
-        }
-        h1 {
-            color: #5900ff;
-            margin-bottom: 10px;
-        }
-        button {
-            background-color: #5900ff;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        button:hover {
-            background-color: #5900ff;
-            transform: scale(1.05);
-        }
-        
-        /* Styl dla całej sekcji galerii - tutaj odpalamy Grid */
-        .galeria-modeli {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            width: 100%;
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-            box-sizing: border-box;
+        :root {
+            --bg-color: #0b0c10;
+            --card-bg: #12141c;
+            --card-border: #1f2430;
+            --accent-purple: #6c5ce7;
+            --accent-pink: #ff0055;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
         }
 
-        /* Styl dla pojedynczej karty w galerii */
-        .karta-modelu {
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 25px;
-            text-align: center;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* 1. EKSKLUZYWNY NAVBAR */
+        header {
+            background: rgba(18, 20, 28, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--card-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 30px;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--accent-purple);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #334155;
+        }
+
+        /* 2. SIATKA DLA SEKCJI STEROWANIA (2 KOLUMNY) */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 850px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+
+        .panel-card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .panel-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        input[type="number"], input[type="text"] {
+            background: #090a0f;
+            border: 1px solid var(--card-border);
+            padding: 10px 14px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            flex: 1;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--accent-purple);
+        }
+
+        .btn-primary {
+            background: var(--accent-purple);
             color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* 3. GALERIA AUT (3 KOLUMNY) */
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .galeria-modeli {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 1024px) {
+            .galeria-modeli {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .galeria-modeli {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* KARTA POJEDYNCZEGO AUTA */
+        .karta-modelu {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .karta-modelu:hover {
-            transform: translateY(-10px);
-            border-color: #5900ff;
-            box-shadow: 0 10px 25px rgba(89, 0, 255, 0.3);
+            transform: translateY(-6px);
+            border-color: #3b82f6;
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.7);
+        }
+
+        .card-image-wrapper {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            background: #000;
+        }
+
+        .karta-modelu img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .karta-modelu h2 {
-            color: #5900ff;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .karta-modelu p {
-            color: #cccccc;
-            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
             line-height: 1.5;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+        }
+
+        .price-tag {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #38bdf8;
+            margin-bottom: 15px;
+        }
+
+        .card-footer {
+            display: flex;
+            gap: 10px;
         }
 
         .btn-model {
-            background: transparent;
+            flex: 1;
+            background: var(--accent-purple);
             color: white;
-            border: 2px solid #5900ff;
-            padding: 10px 20px;
-            border-radius: 25px;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
             cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
         }
 
-        .btn-model:hover {
-            background: #5900ff;
-            box-shadow: 0 0 15px #5900ff;
+        .btn-like {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 42px;
+        }
+
+        .btn-like.active {
+            background: var(--accent-pink) !important;
+            border-color: var(--accent-pink) !important;
+        }
+
+        /* Ustawienia nawigacji ulubionych */
+        .menu-ulubione {
+            display: none;
+        }
+        .dropdown-ulubione:hover .menu-ulubione {
+            display: block !important;
+        }
+
+        /* SEKCJE ROZWIJANE */
+        .extra-panel {
+            margin-top: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 24px;
         }
     </style>
 </head>
 <body>
 
-    <div class="karta" style="margin-top: 20px; margin-bottom: 20px; text-align: center;">
-    <h3>Sprawdź, na co Cię stać!</h3>
-    <p>Wpisz swój miesięczny budżet na ratę (PLN):</p>
-    <input type="number" id="budzet-user" placeholder="Np. 7000" style="padding: 8px; border-radius: 5px; border: none; margin-right: 10px;">
-    <button onclick="sprawdzBudzet()">Sprawdź furę</button>
-    <p id="wynik-budzetu" style="font-weight: bold; margin-top: 15px;"></p>
+    <!-- NAVBAR -->
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">
+                🏎️ BMW <span>PERFORMANCE</span>
+            </div>
+            <div class="nav-actions">
+                <button class="btn-secondary" onclick="filtrujUlubione()">
+                    ❤️ Ulubione
+                </button>
+                <div class="dropdown-ulubione" style="position: relative;">
+                    <div id="liczniku-ulubionych" class="btn-secondary">
+                        ❤️ <span id="ilosc-ulubionych">0</span>
+                    </div>
+                    <div class="menu-ulubione" style="position: absolute; right: 0; top: 110%; background: #12141c; min-width: 220px; border-radius: 12px; border: 1px solid #1f2430; padding: 15px; z-index: 100; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                        <h4 style="margin-bottom: 8px; font-size: 0.9rem; color: var(--accent-purple);">Twoje Ulubione:</h4>
+                        <ul id="lista-ulubionych-hover" style="list-style: none; color: var(--text-muted); font-size: 0.85rem;"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-    <div style="margin-top: 15px; border-top: 1px solid #333; padding-top: 15px;">
-        <p>Lub znajdź swój konkretny model:</p>
-        <input type="text" id="wyszukiwarka-text" placeholder="Np. M3, Coupé, Roadster..." style="padding: 8px; border-radius: 5px; border: none; width: 220px;" oninput="wyszukajAuto()">
-    </div>
-    </div>
+    <div class="container">
 
-    <div class="karta">
-        <h1>Projekt: TYLKO BMW</h1>
-        <p id="status-tekst">Status: Nowe BMW. Cel: BMW</p>
-        <button onclick="odpalFure()">Lecimy</button>
-        <!-- Miejsce na powitanie z LocalStorage -->
-<p id="ostatni-wybor" style="margin-top: 15px; font-style: italic; color: #aaa; display: none;"></p>
-    </div>
+        <!-- DASHBOARD (2 KOLUMNY U GÓRY) -->
+        <div class="dashboard-grid">
+            <div class="panel-card">
+                <h2>BMW M Power Showcase</h2>
+                <p id="status-tekst">Odkryj bezkompromisową moc, precyzję i inżynierię motorsportu. Wybierz i skonfiguruj swój model M.</p>
+                <button class="btn-primary" onclick="odpalFure()">Wylosuj model M</button>
+                <p id="ostatni-wybor" style="margin-top: 12px; font-style: italic; font-size: 0.8rem; display: none;"></p>
+            </div>
 
-   <section class="galeria-modeli" id="galeria-samochodow">
-        </section>
+            <div class="panel-card">
+                <h2>Filtrowanie i Budżet</h2>
+                <p>Dopasuj ratę leasingową lub znajdź konkretny model M Performance:</p>
+                <div class="input-group">
+                    <input type="number" id="budzet-user" placeholder="Maks. rata (np. 10 000 PLN)">
+                    <button class="btn-primary" onclick="sprawdzBudzet()">Szukaj</button>
+                </div>
+                <p id="wynik-budzetu" style="font-weight: 600; color: var(--accent-purple); font-size: 0.85rem;"></p>
 
-    </section> <div id="sekcja-harmonogramu" style="margin: 40px auto; width: 90%; max-width: 1000px; border: 2px dashed #5900ff; padding: 25px; border-radius: 12px; display: none; box-sizing: border-box; background-color: #141414;">
-        <h3 id="naglowek-harmonogramu" style="color: #5900ff; text-align: center; font-size: 22px; margin-bottom: 25px; font-family: sans-serif;"></h3>
-        <div id="lista-wplat" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%;"></div>
+                <div style="margin-top: 15px; border-top: 1px solid var(--card-border); padding-top: 15px;">
+                    <input type="text" id="wyszukiwarka-text" placeholder="Szukaj modelu (np. M3, X5 M)..." oninput="wyszukajAuto()">
+                </div>
+            </div>
+        </div>
+
+        <!-- NAGŁÓWEK GALERII -->
+        <h2 class="section-title">Gama Modelowa M-Power</h2>
+
+        <!-- GALERIA AUT -->
+        <section class="galeria-modeli" id="galeria-samochodow"></section>
+
+        <!-- KALKULATOR LEASINGU -->
+        <div id="sekcja-kalkulatora" class="extra-panel" style="display: none;">
+            <h2 id="kalkulator-tytul" style="color: var(--accent-purple); margin-bottom: 20px;">Konfigurator leasingu</h2>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Okres leasingu: <b id="pokaz-okres" style="color: var(--accent-purple);">60</b> miesięcy</label>
+                <input type="range" id="suwak-okres" min="24" max="84" step="12" value="60" style="width: 100%; cursor: pointer;" oninput="przeliczRateNaZywo()">
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <label style="display: block; margin-bottom: 8px; font-size: 0.9rem;">Wkład własny: <b id="pokaz-wklad" style="color: var(--accent-purple);">10%</b> (<span id="kwota-wkladu">0</span> PLN)</label>
+                <input type="range" id="suwak-wklad" min="0" max="45" step="5" value="10" style="width: 100%; cursor: pointer;" oninput="przeliczRateNaZywo()">
+            </div>
+
+            <div style="background: #090a0f; padding: 20px; border-radius: 12px; border: 1px solid var(--card-border);">
+                <p style="margin: 0 0 5px 0; color: var(--text-muted); font-size: 0.85rem;">Szacowana rata miesięczna:</p>
+                <h1 id="wyliczona-rata" style="color: var(--accent-pink); margin: 0; font-size: 28px;">0 PLN</h1>
+            </div>
+        </div>
+
+        <!-- HARMONOGRAM SPŁAT -->
+        <div id="sekcja-harmonogramu" class="extra-panel" style="display: none;">
+            <h3 id="naglowek-harmonogramu" style="color: var(--accent-purple); text-align: center; font-size: 20px; margin-bottom: 20px;"></h3>
+            <div id="lista-wplat" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 15px; width: 100%;"></div>
+        </div>
+
     </div>
 
     <script src="script.js"></script>
