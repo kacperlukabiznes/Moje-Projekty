@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Wirtualny Portfel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Wirtualny Portfel</h1>
+        <h2>Saldo: <span id="saldo-widok">100</span> PLN</h2>
+
+    <div class="podsumowanie-30dni">
+        <div class="karta-statystyk wplaty-stat">
+            <span>Wpływy (30 dni)</span>
+            <p>+<span id="wplaty-30dni">0</span> PLN</p>
+        </div>
+        <div class="karta-statystyk wydatki-stat">
+            <span>Wydatki (30 dni)</span>
+            <p>-<span id="wydatki-30dni">0</span> PLN</p>
+    </div>
+
+        <input type="number" id="kwota-input" placeholder="Wpisz Kwote">
+
+        <div class="przyciski">
+            <button onclick="obslugaWplaty()">Wplac</button>
+            <button onclick="obslugaWydatku()">Wydaj</button>
+        </div>
+
+        <h3>Historia transakcji:</h3>
+        <ul id="historia-transakcji"></ul>
+        <button id="wiecej-btn" onclick="pokazWiecej()">Zobacz więcej</button>
+        <button class="reset-btn" onclick="resetujDane()">Wyczyść konto</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

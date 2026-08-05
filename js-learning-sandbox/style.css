@@ -1,0 +1,123 @@
+body {
+    background-color: #05050a;
+    color: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+    
+    /* Centrowanie na środku ekranu */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #0b0f19;
+    padding: 2.5rem;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    
+    /* Neonowy cień wokół karty */
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.2),
+                0 0 80px rgba(168, 85, 247, 0.15);
+}
+
+/* Stylizacja pól tekstowych i przycisków */
+input {
+    width: 100%;
+    padding: 12px;
+    background: #05050a;
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    color: #fff;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+input:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+}
+
+.przyciski {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #38bdf8;
+    color: #05050a;
+}
+
+button:hover {
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+    transform: translateY(-2px);
+}
+
+/* Stylizacja samej listy transakcji */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+}
+
+li {
+    background: #05050a;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    border-left: 3px solid #38bdf8;
+    display: flex;
+    justify-content: space-between;
+}
+
+#wiecej-btn {
+    background: transparent;
+    border: 1px solid #1e293b;
+    color: #94a3b8;
+    width: 100%;
+}
+
+#wiecej-btn:hover {
+    color: #fff;
+    border-color: #38bdf8;
+}
+
+/* Kolorowe akcenty dla transakcji */
+li.wpis-wplata {
+    border-left-color: #4ade80;
+    color: #4ade80;
+}
+
+li.wpis-wydatek {
+    border-left-color: #f43f5e;
+    color: #f43f5e;
+}
+
+/* Przycisk resetu na samym dole */
+.reset-btn {
+    background: transparent;
+    border: none;
+    color: #475569;
+    font-size: 0.8rem;
+    margin-top: 15px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.reset-btn:hover {
+    color: #f43f5e;
+    box-shadow: none;
+    transform: none;
+}
