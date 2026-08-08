@@ -13,10 +13,10 @@ body {
 
 .container {
     background: #0b0f19;
-    padding: 2.5rem;
+    padding: 15px 25px;
     border-radius: 20px;
     width: 100%;
-    max-width: 400px;
+    max-width: 480px;
     border: 1px solid rgba(56, 189, 248, 0.3);
     
     /* Neonowy cień wokół karty */
@@ -24,17 +24,41 @@ body {
                 0 0 80px rgba(168, 85, 247, 0.15);
 }
 
+h1 {
+    text-align: center;
+    font-size: 2.4rem !important;
+    font-weight: 800;
+    margin: 5px 0 15px 0;
+}
 /* Stylizacja pól tekstowych i przycisków */
 input {
     width: 100%;
-    padding: 12px;
+    padding: 8px  12px;
     background: #05050a;
     border: 1px solid #1e293b;
     border-radius: 8px;
     color: #fff;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     box-sizing: border-box;
     outline: none;
+}
+
+select {
+    width: 100%;
+    padding: 8px 12px;
+    background: #05050a;
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    color: #fff;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+}
+
+select:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
 }
 
 input:focus {
@@ -45,7 +69,7 @@ input:focus {
 .przyciski {
     display: flex;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 button {
@@ -74,9 +98,9 @@ ul {
 
 li {
     background: #05050a;
-    padding: 10px 15px;
+    padding: 6px 12px;
     border-radius: 6px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     border-left: 3px solid #38bdf8;
     display: flex;
     justify-content: space-between;
@@ -120,4 +144,135 @@ li.wpis-wydatek {
     color: #f43f5e;
     box-shadow: none;
     transform: none;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kat-nazwa {
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.kat-kwota {
+    font-weight: bold;
+}
+
+.statystyki-kontener {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.statystyka-box {
+    flex: 1;
+    background: #05050a;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #1e293b;
+    text-align: center;
+}
+
+statystyka-box p {
+    margin: 0 0 5px 0;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+statystyka-box h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.statystyka-box:nth-child(1) h3 {
+    color: #4ade80;
+}
+
+.statystyka-box:nth-child(2) h3 {
+    color: #f43f5e;
+}
+
+.balance-card {
+    background-color: #0d131d; /* dopasuj do tła obecnych kafelków */
+    border: 1px solid #1a2332;  /* delikatna obramówka */
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.balance-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #8b949e;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.balance-amount {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff; /* lub jasny błękit matching przyciski */
+}
+
+/* Układ dwóch pól w jednej linii */
+.form-row {
+    display: flex !important;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.form-row input,
+.form-row select {
+    width: 50% !important;
+    margin-bottom: 0 !important;
+    padding: 8px 12px;
+    color: #94a3b8 !important;
+}
+
+.form-row input,
+.form-row select {
+    color: #94a3b8 !important;
+    opacity: 1 !important; /* usuwa domyślne półprzezroczystości w Chrome/Firefox */
+}
+
+.form-row input::placeholder {
+    color: #94a3b8 !important;
+    opacity: 1 !important;
+}
+
+.form-row select option {
+    background-color: #0d131d;
+    color: #ffffff;
+}
+
+.container {
+    padding: 15px 20px;
+}
+
+h1 {
+    margin: 0 0 10px 0;
+    font-size: 1.4rem;
+}
+
+.balance-card {
+    padding: 12px;
+    margin-bottom: 10px;
+}
+
+.statystyki-kontener {
+    margin-bottom: 10px;
+}
+
+li {
+    padding: 6px 10px;
+    margin-bottom: 5px;
 }
